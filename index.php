@@ -27,11 +27,58 @@ include("connect.php");
 </head>
 <body>
 <!-- WHERE Country='Mexico'; -->
+
 <?php
         $q = "select * from supply where activeState = '1' ORDER BY 'registID' " ;
         $query = sqlsrv_query($conn,$q);
    ?>    
+   <p>รายชื่อพัสดุยืมได้</p>
+
+    <div>
+   <table border="1" >
+   
+<thead>
+   <tr>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+
+    </tr>
+</thead>
+<?php 
+    while($result = sqlsrv_fetch_array($query,SQLSRV_FETCH_ASSOC))
+    {
+?>
+    <tr>
+    <td><?PHP echo $result['registID']; ?></td>
+    <td><?PHP echo $result['model']; ?></td>
+    <td><?PHP echo $result['category']; ?></td>
+    <td><?PHP echo $result['activeState']; ?></td>
+    <td><a href="add.php?id= <?php echo $row["id"];?>">edit</a></td>
+    <td><a href="borrow.php?id= <?php echo $row["id"];?>">ยืม</a></td>
+
     
+</tr>
+
+<?PHP
+    }
+?>
+
+</table>
+    </div>
+<div>
+<a href="addForm.php">เพิ่มพัสดุ</a>
+</div>
+<br>
+
+<p>รายชื่อพัสดุยืมได้ไม่ได้.</p>
+<?php
+        $q = "select * from supply where activeState != '1' ORDER BY 'registID' " ;
+        $query = sqlsrv_query($conn,$q);
+   ?>    
+    <div>
    <table border="1" >
    
    <thead>
@@ -60,8 +107,7 @@ include("connect.php");
 ?>
 
 </table>
-<div>
-<a href="addForm.php">เพิ่มพัสดุ</a>
-</div>
+    </div>
+
 </body>
 </html>
