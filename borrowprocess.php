@@ -5,16 +5,15 @@ require("connect.php");
 $ID_ = $_POST['ID']; 
 $regisID_ = $_POST['registID'];
 $activeState_ = $_POST['activeState'];
-$division_ = $_POST['division'];
+$division_ = $_POST['witness'];
 
 // $model_ = $_POST['model'];
 // $brand_ = $_POST['brand'];
 // $category_ = $_POST['category'];
 ?>
 <?php
-// $q = "INSERT INTO  supply (id, registID, activeState,  division, model, brand, category) VALUES ('?', '?', '?', '?' ,?, ?,?)";
 
-$q1 = "INSERT INTO  supply (id, registID, activeState,  division) VALUES (?, ?, ?, ?)";
+$q1 = "INSERT INTO  activity (id, borrowerID, activityState,  witness) VALUES (?, ?, ?, ?)";
 
 $params1 = array("$ID_",$regisID_,$activeState_,$division_, );
 
@@ -30,12 +29,6 @@ if($stmt ===false){
     echo "Data insert";
 }
 
-// if($result ===false){
-//     echo "Data not insert";
-//     // header("location:index.php");
-// } else{
-//     echo "Data insert";
-// }
 
 
 //close connection

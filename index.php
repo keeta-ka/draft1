@@ -30,7 +30,7 @@ include("connect.php");
 
 <?php
         $q = "select * from supply where activeState = '1' ORDER BY 'registID' " ;
-        $query = sqlsrv_query($conn,$q);
+        $result = sqlsrv_query($conn,$q);
    ?>    
    <p>รายชื่อพัสดุยืมได้</p>
 
@@ -39,6 +39,8 @@ include("connect.php");
    
 <thead>
    <tr>
+   <th>ลำดับ</th>
+
         <th>รายชื่อพัสดุ ยืมได้</th>
         <th>รายชื่อพัสดุ ยืมได้</th>
         <th>รายชื่อพัสดุ ยืมได้</th>
@@ -47,17 +49,25 @@ include("connect.php");
 
     </tr>
 </thead>
+
 <?php 
-    while($result = sqlsrv_fetch_array($query,SQLSRV_FETCH_ASSOC))
+    $num = 0;
+    while($row = sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC))
     {
+
 ?>
+
     <tr>
-    <td><?PHP echo $result['registID']; ?></td>
-    <td><?PHP echo $result['model']; ?></td>
-    <td><?PHP echo $result['category']; ?></td>
-    <td><?PHP echo $result['activeState']; ?></td>
-    <td><a href="add.php?id= <?php echo $row["id"];?>">edit</a></td>
-    <td><a href="borrow.php?id= <?php echo $row["id"];?>">ยืม</a></td>
+    <td> <?php echo $num+=1; ?> </td>
+
+    <td><?PHP echo $row['registID']; ?></td>
+    <td><?PHP echo $row['model']; ?></td>
+    <td><?PHP echo $row['category']; ?></td>
+    <td><?PHP echo $row['activeState']; ?></td>
+    <td><a href="editform.php?reg=<?php echo $row["registID"];?>">edit</a></td>
+    <td><a href="borrowform2.php?reg=<?php echo $row["registID"];?>">ยืม</a></td>
+    <td><a href="#>">คืน</a></td>
+
 
     
 </tr>
@@ -75,8 +85,46 @@ include("connect.php");
 
 <p>รายชื่อพัสดุยืมได้ไม่ได้.</p>
 <?php
-        $q = "select * from supply where activeState != '1' ORDER BY 'registID' " ;
-        $query = sqlsrv_query($conn,$q);
+        $q1 = "select * from supply where activeState != '1' ORDER BY 'registID' " ;
+        $result1 = sqlsrv_query($conn,$q1);
+   ?>    
+    <div>
+   <table border="1" >
+   
+   <thead>
+   <tr>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>สถานะพัสดุ</th>
+
+    </tr>
+</thead>
+<?php 
+    $num1 = 0;
+    while($row1 = sqlsrv_fetch_array($result1,SQLSRV_FETCH_ASSOC))
+    {
+?>
+    <tr>
+    <td><?php echo $num1 +=1;?></td>
+    <td><?PHP echo $row1['registID']; ?></td>
+    <td><?PHP echo $row1['model']; ?></td>
+    <td><?PHP echo $row1['category']; ?></td>
+    <td><?PHP echo $row1['activeState']; ?></td>
+    </tr>
+
+<?PHP
+    }
+?>
+
+</table>
+    </div>
+
+    <p>รายการยืม</p>
+<?php
+        $q2 = "select * from activity where activityState != '1' ORDER BY 'id' " ;
+        $result2 = sqlsrv_query($conn,$q2);
    ?>    
     <div>
    <table border="1" >
@@ -92,14 +140,18 @@ include("connect.php");
     </tr>
 </thead>
 <?php 
-    while($result = sqlsrv_fetch_array($query,SQLSRV_FETCH_ASSOC))
+$num2 = 0;
+    while($row2 = sqlsrv_fetch_array($result2,SQLSRV_FETCH_ASSOC))
     {
 ?>
     <tr>
-    <th><?PHP echo $result['registID']; ?></th>
-    <th><?PHP echo $result['model']; ?></th>
-    <th><?PHP echo $result['category']; ?></th>
-    <th><?PHP echo $result['activeState']; ?></th>
+    <td><?php echo $num2 +=1;?></td>
+    <td><?PHP echo $row2['id']; ?></td>
+    <td><?PHP echo $row2['borrowerID']; ?></td>
+    <td><?PHP echo $row2['witness']; ?></td>
+    <td><?PHP echo $row2['activityState']; ?></td>
+    <td><?PHP echo $row2['docs']; ?></td>
+
     </tr>
 
 <?PHP
