@@ -2,11 +2,11 @@
 require("connect.php");
 // $conn->set_charset("utf8");
 
-$ID_ = $_POST['ID']; 
-$BorrowerID_ = $_POST['BorrowerID'];
-$activeState_ = $_POST['activeState'];
-$division_ = $_POST['division'];
-$SupplyID_ = $_POST['supplyid'];
+$ID_ = $_POST['id']; 
+$BorrowerID_ = $_POST['borrowerID'];
+$ActiveState_ = $_POST['activeState'];
+$Division_ = $_POST['division'];
+$SupplyID_ = $_POST['supplyID'];
 
 // $model_ = $_POST['model'];
 // $brand_ = $_POST['brand'];
@@ -16,7 +16,7 @@ $SupplyID_ = $_POST['supplyid'];
 // $q = "INSERT INTO  supply (id, registID, activeState,  division, model, brand, category) VALUES ('?', '?', '?', '?' ,?, ?,?)";
 
 $q1 = "INSERT INTO  activity (id, borrowerID, activityState,  witness, docs) VALUES (?, ?, ?, ?, ?)";
-$params1 = array("$ID_",$BorrowID_,$activeState_,$division_, $SupplyID_ );
+$params1 = array("$ID_",$BorrowerID_,$ActiveState_,$Division_, $SupplyID_ );
 
 
 
@@ -36,7 +36,7 @@ if($stmt ===false){
 // } else{
 //     echo "Data insert";
 // }
-$q2 =  "UPDATE supply SET activeState = $activeState_ WHERE registID =   '".$SupplyID_."'   "; 
+$q2 =  "UPDATE supply SET activeState = $ActiveState_ WHERE registID =   '".$SupplyID_."'   "; 
 $stmt2 = sqlsrv_query($conn,$q2);
 
 //close connection

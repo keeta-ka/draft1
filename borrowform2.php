@@ -20,17 +20,20 @@ $regID = isset($_GET['reg']) ? $_GET['reg']: '';
 } 
 ?>
 
-    <form method="post" action="borrowProcess2.php" id = "brrform" enctype="mulit.form-data" >
+    <form method="post" action="borrowprocess2.php" id = "brrform" enctype="mulit.form-data" >
     
-    ID : <input type = "text" name = "ID"> not null <br>
+    ID : <input type = "text" name = "id"> not null <br>
  
-    BorrowerID : <input type = "text" name = "BorrowerID">  not null<br> 
+    BorrowerID : <input type = "text" name = "borrowerID">  not null<br> 
     
     activeState : <input type="text" name = "activeState"> not null <br> 
 
     division : <input type = "text" name ="division"> not null <br>
 
-    Supply : <input type = "text" name ="supplyid" value="<?php echo $row['registID'];?>"> not null <br>
+    Supply : <input type = "text" name ="supplyID" value="<?php echo $row['registID'];?>"> not null <br>
+
+    TimeBorrow : <input type = "text" name ="time"> not null <br>
+
 
 
     <!-- project : <input type = "text" name ="project"><br> -->
@@ -41,7 +44,7 @@ $regID = isset($_GET['reg']) ? $_GET['reg']: '';
  
     category : <input type = "text" name ="category"><br> -->
 
-    <input type="submit" value ="Add">
+    <input type="submit" value ="ยืม">
  
     </form>
 </body>

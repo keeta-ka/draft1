@@ -32,7 +32,7 @@ include("connect.php");
         $q = "select * from supply where activeState = '1' ORDER BY 'registID' " ;
         $result = sqlsrv_query($conn,$q);
    ?>    
-   <p>รายชื่อพัสดุยืมได้</p>
+   <p>รายชื่อพัสดุยืมได้ <b><u>(dynamic)</u></b></p>
 
     <div>
    <table border="1" >
@@ -41,11 +41,11 @@ include("connect.php");
    <tr>
    <th>ลำดับ</th>
 
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
+   <!-- <th>ลำดับ</th> -->
+        <th>RegistID</th>
+        <th>model</th>
+        <th>category</th>
+        <th>สถานะพัสดุ</th>
 
     </tr>
 </thead>
@@ -66,7 +66,7 @@ include("connect.php");
     <td><?PHP echo $row['activeState']; ?></td>
     <td><a href="editform.php?reg=<?php echo $row["registID"];?>">edit</a></td>
     <td><a href="borrowform2.php?reg=<?php echo $row["registID"];?>">ยืม</a></td>
-    <td><a href="#>">คืน</a></td>
+    <!-- <td><a href="#>">คืน</a></td> -->
 
 
     
@@ -83,7 +83,7 @@ include("connect.php");
 </div>
 <br>
 
-<p>รายชื่อพัสดุยืมได้ไม่ได้.</p>
+<p>รายชื่อพัสดุที่ถูกยืม.<u><b>(dynamic)</b></u></p>
 <?php
         $q1 = "select * from supply where activeState != '1' ORDER BY 'registID' " ;
         $result1 = sqlsrv_query($conn,$q1);
@@ -93,10 +93,10 @@ include("connect.php");
    
    <thead>
    <tr>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>ลำดับ</th>
+        <th>RegistID</th>
+        <th>model</th>
+        <th>category</th>
         <th>สถานะพัสดุ</th>
 
     </tr>
@@ -112,6 +112,8 @@ include("connect.php");
     <td><?PHP echo $row1['model']; ?></td>
     <td><?PHP echo $row1['category']; ?></td>
     <td><?PHP echo $row1['activeState']; ?></td>
+    <td><a href="returnform.php?reg1=<?php echo $row1['registID'];?>">คืน</a></td>
+
     </tr>
 
 <?PHP
@@ -121,7 +123,7 @@ include("connect.php");
 </table>
     </div>
 
-    <p>รายการยืม</p>
+    <p>ประวัติรายการยืม <b><u>(static)</u></b></p>
 <?php
         $q2 = "select * from activity where activityState != '1' ORDER BY 'id' " ;
         $result2 = sqlsrv_query($conn,$q2);
@@ -131,11 +133,12 @@ include("connect.php");
    
    <thead>
    <tr>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
-        <th>รายชื่อพัสดุ ยืมได้</th>
+        <th>ลำดับ</th>
+        <th>รายชื่อผู้ยืม</th>
+        <th>รายชื่อสังกัด</th>
+        <th>สถานะการยืม</th>
+        <th>เลขที่พัสดุ</th>
+
 
     </tr>
 </thead>
@@ -146,12 +149,10 @@ $num2 = 0;
 ?>
     <tr>
     <td><?php echo $num2 +=1;?></td>
-    <td><?PHP echo $row2['id']; ?></td>
     <td><?PHP echo $row2['borrowerID']; ?></td>
     <td><?PHP echo $row2['witness']; ?></td>
     <td><?PHP echo $row2['activityState']; ?></td>
     <td><?PHP echo $row2['docs']; ?></td>
-
     </tr>
 
 <?PHP
