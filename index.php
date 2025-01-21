@@ -26,7 +26,7 @@ include("connect.php");
    </style> -->
 </head>
 <body>
-<!-- WHERE Country='Mexico'; -->
+
 
 <?php
         $q = "select * from supply where activeState = '1' ORDER BY 'registID' " ;
